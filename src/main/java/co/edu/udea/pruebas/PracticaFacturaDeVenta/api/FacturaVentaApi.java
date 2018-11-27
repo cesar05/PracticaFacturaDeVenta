@@ -20,7 +20,7 @@ import co.edu.udea.pruebas.PracticaFacturaDeVenta.repositorio.FacturaRepository;
 import co.edu.udea.pruebas.PracticaFacturaDeVenta.repositorio.ProductoRepository;
 
 @RestController
-@CrossOrigin(origins="*")
+@CrossOrigin(origins="http://localhost:4200")
 @RequestMapping(value = "/", headers = {
 	"accept=application/json",
     "content-type=application/json"
@@ -50,26 +50,25 @@ public class FacturaVentaApi {
 	public String guardarFactura(@RequestBody Map<String,Object> payload) {
 		FacturaEntity facturaEntity=new FacturaEntity();
 		facturaEntity.setNumeroFactura((Integer)(payload.get("numero-factura")));
-		facturaEntity.setValorTotal((Double) payload.get("valor-total"));
-		facturaEntity.setNombreCajero((String) payload.get("nombre-cajero"));
-		facturaEntity.setFechaVenta(Date.valueOf((String)payload.get("fecha-venta")));
-		facturaEntity.setNombreEstablecimiento((String) payload.get("nombre-establecimiento"));
-		facturaEntity.setNit((String) payload.get("nit"));
-		facturaEntity.setAhorro((Double)(payload.get("ahorro")));
-		facturaEntity.setValorPagado((Double)payload.get("valor-pagado"));
+		facturaEntity.setValorTotal(Double.valueOf(payload.get("valor-total").toString()));
+		facturaEntity.setNombreCajero(payload.get("nombre-cajero").toString());
+		facturaEntity.setFechaVenta(Date.valueOf(payload.get("fecha-venta").toString()));
+		facturaEntity.setNombreEstablecimiento(payload.get("nombre-establecimiento").toString());
+		facturaEntity.setNit(payload.get("nit").toString());
+		facturaEntity.setAhorro(Double.valueOf(payload.get("ahorro").toString()));
+		facturaEntity.setValorPagado(Double.valueOf(payload.get("valor-pagado").toString()));
 		
 		List<VentaEntity> listVentaEntity=new ArrayList<>();
 		List<Map<String,Object>> listProductos=(List<Map<String, Object>>) payload.get("productos");
 		
 		for(Map<String,Object> producto:listProductos) {
-			Integer codigo=(Integer)producto.get("codigo");
-			Optional<ProductoEntity> productoEntity=productoRepository.findById(Long.valueOf(codigo));
+			Optional<ProductoEntity> productoEntity=productoRepository.findById(Long.valueOf(producto.get("codigo").toString()));
 			if(productoEntity.isPresent()) {
 				VentaEntity ventaEntity=new VentaEntity();
 				ventaEntity.setProducto(productoEntity.get());
-				ventaEntity.setCantidad((Integer)producto.get("cantidad"));
-				ventaEntity.setIvaCalculado((Double)producto.get("iva-calculado"));
-				ventaEntity.setValorTotal((Double)producto.get("valor-total"));
+				ventaEntity.setCantidad(Integer.parseInt(producto.get("cantidad").toString()));
+				ventaEntity.setIvaCalculado(Double.valueOf(producto.get("iva-calculado").toString()));
+				ventaEntity.setValorTotal(Double.valueOf(producto.get("valor-total").toString()));
 				ventaEntity.setFactura(facturaEntity);
 				listVentaEntity.add(ventaEntity);
 			}
