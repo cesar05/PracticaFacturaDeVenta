@@ -8,9 +8,11 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.udea.pruebas.PracticaFacturaDeVenta.entity.FacturaEntity;
@@ -44,6 +46,15 @@ public class FacturaVentaApi {
 			productoRepository.save(productoEntity);
 		}
 		return "ok";
+	}
+	
+	@GetMapping(value="/productos")
+	public ProductoEntity findProducto(@RequestParam("id") String id){
+		Optional<ProductoEntity> producEntityOptional=productoRepository.findById(Long.valueOf(id));
+		ProductoEntity productoEntity=null;
+		if(producEntityOptional.isPresent())
+			 productoEntity=producEntityOptional.get();
+		return productoEntity;
 	}
 	
 	@PostMapping(value="/factura")
