@@ -19,6 +19,11 @@ public class FacturaEntity {
 	private String nombreCajero;
 	private Date fechaVenta;
 	
+	private String nombreEstablecimiento;
+	private String nit;
+	private double ahorro;
+	private double valorPagado;
+	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "factura")
 	private Collection<VentaEntity> ventaEntityCollection;
 
@@ -61,6 +66,38 @@ public class FacturaEntity {
 
 	public void setVentaEntityCollection(Collection<VentaEntity> ventaEntityCollection) {
 		this.ventaEntityCollection = ventaEntityCollection;
+	}
+
+	public String getNombreEstablecimiento() {
+		return nombreEstablecimiento;
+	}
+
+	public void setNombreEstablecimiento(String nombreEstablecimiento) {
+		this.nombreEstablecimiento = nombreEstablecimiento;
+	}
+
+	public String getNit() {
+		return nit;
+	}
+
+	public void setNit(String nit) {
+		this.nit = nit;
+	}
+
+	public double getAhorro() {
+		return ahorro;
+	}
+
+	public void setAhorro(double ahorro) {
+		this.ahorro = ahorro;
+	}
+
+	public double getValorPagado() {
+		return valorPagado;
+	}
+
+	public void setValorPagado(double valorPagado) {
+		this.valorPagado = valorPagado;
 	}
 		
 }

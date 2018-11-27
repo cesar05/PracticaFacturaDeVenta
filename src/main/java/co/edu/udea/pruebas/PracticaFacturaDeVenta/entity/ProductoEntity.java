@@ -13,19 +13,19 @@ public class ProductoEntity {
 	
 	@Id
 	@NotNull
-	private int codigo;	
+	private Long codigo;	
 	private String producto;
-	private double valorUnitario;
-	private double iva;	
-	
+	private Double valorUnitario;
+	private Double iva;
+		
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
 	private Collection<VentaEntity> ventaEntityCollection;
 
-	public int getCodigo() {
+	public Long getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(int codigo) {
+	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
 
@@ -37,19 +37,19 @@ public class ProductoEntity {
 		this.producto = producto;
 	}
 
-	public double getValorUnitario() {
+	public Double getValorUnitario() {
 		return valorUnitario;
 	}
 
-	public void setValorUnitario(double valorUnitario) {
+	public void setValorUnitario(Double valorUnitario) {
 		this.valorUnitario = valorUnitario;
 	}
 
-	public double getIva() {
+	public Double getIva() {
 		return iva;
 	}
 
-	public void setIva(double iva) {
+	public void setIva(Double iva) {
 		this.iva = iva;
 	}
 
@@ -59,6 +59,6 @@ public class ProductoEntity {
 
 	public void setVentaEntityCollection(Collection<VentaEntity> ventaEntityCollection) {
 		this.ventaEntityCollection = ventaEntityCollection;
-	}
+	}	
 	
 }

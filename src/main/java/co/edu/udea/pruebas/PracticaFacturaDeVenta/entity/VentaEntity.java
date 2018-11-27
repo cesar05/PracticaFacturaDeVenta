@@ -14,8 +14,10 @@ public class VentaEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int numeroFactura;		
+	private Long id;
 	private double ivaCalculado;
+	private double valorTotal;
+	private int cantidad;
 	
 	@ManyToOne
 	@JoinColumn(name="PRODUCTO",referencedColumnName="codigo")
@@ -25,12 +27,12 @@ public class VentaEntity {
 	@JoinColumn(name="FACTURA",referencedColumnName="numeroFactura")
 	private FacturaEntity factura;
 
-	public int getNumeroFactura() {
-		return numeroFactura;
+	public Long getId() {
+		return id;
 	}
 
-	public void setNumeroFactura(int numeroFactura) {
-		this.numeroFactura = numeroFactura;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public double getIvaCalculado() {
@@ -55,6 +57,22 @@ public class VentaEntity {
 
 	public void setFactura(FacturaEntity factura) {
 		this.factura = factura;
+	}
+
+	public double getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(double valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
+	public int getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
 	}
 	
 }
