@@ -20,7 +20,7 @@ import co.edu.udea.pruebas.PracticaFacturaDeVenta.repositorio.FacturaRepository;
 import co.edu.udea.pruebas.PracticaFacturaDeVenta.repositorio.ProductoRepository;
 
 @RestController
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins="*")
 @RequestMapping(value = "/", headers = {
 	"accept=application/json",
     "content-type=application/json"
